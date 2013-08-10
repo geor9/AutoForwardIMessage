@@ -11,5 +11,5 @@ To install
 Note
 ====
 - Only works if Messages app is running.
-- Only supports text iMessages. Pictures, movies won't work.
+- Only supports text iMessages. Pictures, movies won't work. Presumably, not all iOS emoji will work either.
 - Only supports incoming iMessages. Doesn't support relaying an outgoing iMessage.
