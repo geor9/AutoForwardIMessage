@@ -1,6 +1,3 @@
-# ToDo
-# - This only does 1-way relaying of iMessage to another chat service - support 2-way?
-
 # References
 # https://discussions.apple.com/thread/5214769?start=0&tstart=0
 # https://46b.it/2012/hacking-with-imessage
