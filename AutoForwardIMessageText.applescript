@@ -1,3 +1,7 @@
+# AutoForwardIMessageText.applescript
+# - Supports 2-way relaying of iMessage to/from another chat service
+# - To send iMessage, each outgoing iMessage must be formatted as: "[iMessage destination] Message"
+
 # References
 # https://discussions.apple.com/thread/5214769?start=0&tstart=0
 # https://46b.it/2012/hacking-with-imessage
@@ -35,15 +39,35 @@ using terms from application "Messages"
 		set recvBuddy to name of theBuddy as text
 		
 		# fwd
-		if recvService = myIMsgService then
-			set fwdMsg to "[" & recvBuddy & "] [" & recvText & "]"
-			
-			tell application "Messages"
-				set sendServiceName to name of 1st service whose name = fwdService
-				set myid to get id of service sendServiceName
-				set sendBuddy to buddy fwdServiceBuddy of service id myid
-				send fwdMsg to sendBuddy
-			end tell
+		if recvText ­ "" then
+			try
+				if recvService = myIMsgService then # incoming iMessage
+					# recvBuddyId is ABCDEFGH-IJKL-MNOP-QRST-UVWXYZABCDEF:+17894560123
+					set recvBuddyId to id of theBuddy as text
+					set oldDelims to AppleScript's text item delimiters
+					set AppleScript's text item delimiters to {":"}
+					set recvBuddyId to text item 2 of recvBuddyId
+					set AppleScript's text item delimiters to oldDelims
+					# now recvBuddyId is +17894560123
+					
+					set fwdMsg to "[" & recvBuddy & "] [" & recvBuddyId & "] [" & recvText & "]"
+					set sendServiceName to name of 1st service whose name = fwdService
+					set myid to get id of service sendServiceName
+					set sendBuddy to buddy fwdServiceBuddy of service id myid
+					send fwdMsg to sendBuddy
+				else if recvService = fwdService then # outgoing iMessage
+					set sendServiceName to name of 1st service whose name = myIMsgService
+					set myid to get id of service sendServiceName
+					set tokens to words of recvText
+					set targetBuddy to get item 1 of tokens
+					set sendBuddy to buddy targetBuddy of service id myid
+					# chop out targetBuddy from recvText
+					set fwdMsg to text (2 + (length of targetBuddy)) thru (length of recvText) of recvText
+					send fwdMsg to sendBuddy
+				end if
+			on error err
+				# optionally log errors here
+			end try
 		end if
 		
 		# make messages happy
