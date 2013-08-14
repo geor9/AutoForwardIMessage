@@ -11,11 +11,13 @@ To install
 Note
 ====
 - Supports two-way iMessage forwarding.
-- Only works if Messages app is (1) running and (2) out of focus.
+- Only works if Messages app is both (1) running and (2) out of focus.
  - This script relies on "Message Received" event to fire. It seems that this event may not fire (and hence forwarding won't work) if:
   - (1) Messages app currently has focus, and
   - (2) if you receive messages on active chat.
  - Perhaps the fix is to listen for "Message Received in Active Chat" event too?
-- Only supports text iMessages. Pictures, movies won't work. Presumably, not all iOS emoji will work either.
+- Only supports text iMessages. Pictures, movies won't work.
+ - Active discussion at https://discussions.apple.com/thread/5214769
+- Presumably, not all iOS emoji will work either.
  - I personally use a secondary Google Talk account for forwarding.
- - Google Hangout app seems to support iPhone emoji, which plays nicely as well.
+ - Google Hangout Android app seems to support iPhone emoji, which plays nicely as well.
