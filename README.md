@@ -2,7 +2,7 @@ AutoForwardIMessage
 ===================
 
 A very simple AppleScript to help those who have to juggle between Android and iPhone...
-- Forwards incoming iMessage texts to any account of choice
+- Forwards incoming and outgoing iMessage texts to any account of choice
 
 To install
 ==========
@@ -10,6 +10,7 @@ To install
 
 Note
 ====
+- Supports two-way iMessage forwarding.
 - Only works if Messages app is running.
 - Only supports text iMessages. Pictures, movies won't work. Presumably, not all iOS emoji will work either.
-- Only supports incoming iMessages. Doesn't support relaying an outgoing iMessage.
+- It seems that Messages sometimes doesn't fire "Message Received" event for some reason - known issue?
