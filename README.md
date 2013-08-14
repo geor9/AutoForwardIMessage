@@ -13,4 +13,6 @@ Note
 - Supports two-way iMessage forwarding.
 - Only works if Messages app is running.
 - Only supports text iMessages. Pictures, movies won't work. Presumably, not all iOS emoji will work either.
-- It seems that Messages sometimes doesn't fire "Message Received" event for some reason - known issue?
+- This script relies on "Message Received" event to fire. It seems that this event may not fire (and hence forwarding won't work) if:
+ - Messages app currently has focus, and
+ - if you receive messages on active chat.
