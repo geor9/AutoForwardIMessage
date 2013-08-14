@@ -16,3 +16,4 @@ Note
 - This script relies on "Message Received" event to fire. It seems that this event may not fire (and hence forwarding won't work) if:
  - Messages app currently has focus, and
  - if you receive messages on active chat.
+- I personally use a secondary Google Talk account for forwarding. Google Hangout app seems to support iPhone emoji, which plays nicely as well.
