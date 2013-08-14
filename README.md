@@ -6,7 +6,7 @@ A very simple AppleScript to help those who have to juggle between Android and i
 
 To install
 ==========
-- Register the script as in https://46b.it/2012/hacking-with-imessage
+- Register the script with "Message Received" event - refer to https://46b.it/2012/hacking-with-imessage
 
 Note
 ====
