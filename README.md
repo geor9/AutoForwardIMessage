@@ -16,8 +16,8 @@ Note
   - (1) Messages app currently has focus, and
   - (2) if you receive messages on active chat.
  - Perhaps the fix is to listen for "Message Received in Active Chat" event too?
-- Only supports text iMessages. Pictures, movies won't work.
- - Active discussion at https://discussions.apple.com/thread/5214769
+- Only supports one-to-onw text iMessages. Group messsages, pictures, movies don't work.
+ - Active discussion on iMessage attachments at https://discussions.apple.com/thread/5214769
 - Presumably, not all iOS emoji will work either.
  - I personally use a secondary Google Talk account for forwarding.
  - Google Hangout Android app seems to support iPhone emoji, which plays nicely as well.
