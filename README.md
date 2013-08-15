@@ -16,7 +16,7 @@ Note
   - (1) Messages app currently has focus, and
   - (2) if you receive messages on active chat.
  - Perhaps the fix is to listen for "Message Received in Active Chat" event too?
-- Only supports one-to-onw text iMessages. Group messsages, pictures, movies don't work.
+- Only supports one-to-one text iMessages. Group messsages, pictures, movies don't work.
  - Active discussion on iMessage attachments at https://discussions.apple.com/thread/5214769
 - Presumably, not all iOS emoji will work either.
  - I personally use a secondary Google Talk account for forwarding.
