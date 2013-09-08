@@ -6,11 +6,12 @@ A very simple AppleScript to help those who have to juggle between Android and i
 
 To install
 ==========
-- Register the script with "Message Received" event - refer to https://46b.it/2012/hacking-with-imessage
+- OS X 10.8: Register the script with "Message Received" event - refer to https://46b.it/2012/hacking-with-imessage
+- OS X 10.9: Haven't tested yet, but it looks like they don't let you specify a script for each event - they make you specify a script folder
 
 Note
 ====
-- Supports two-way iMessage forwarding.
+- Supports two-way iMessage forwarding, tested on OS X 10.8.
 - Only works if Messages app is both (1) running and (2) out of focus.
  - This script relies on "Message Received" event to fire. It seems that this event may not fire (and hence forwarding won't work) if:
   - (1) Messages app currently has focus, and 
