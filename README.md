@@ -7,7 +7,7 @@ A very simple AppleScript to help those who have to juggle between Android and i
 To install
 ==========
 - OS X 10.8: Register the script with "Message Received" event - refer to https://46b.it/2012/hacking-with-imessage
-- OS X 10.9: Haven't tested yet, but it looks like they don't let you specify a script for each event - they make you specify a script folder
+- OS X 10.9: Refer to https://github.com/yongjunj/AutoForwardIMessage/pull/1
 
 Note
 ====
