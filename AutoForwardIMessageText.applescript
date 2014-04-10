@@ -43,7 +43,7 @@ using terms from application "Messages"
 		set recvBuddy to name of theBuddy as text
 		
 		# fwd
-		if recvText � "" then
+		if recvText ≠ "" then
 			try
 				if recvService = myIMsgService then # incoming iMessage
 					# recvBuddyId is ABCDEFGH-IJKL-MNOP-QRST-UVWXYZABCDEF:+17894560123
