@@ -15,6 +15,7 @@ end tell
 # Example result: {"Bonjour", "Facebook Chat", "AIM", "E:you@me.com"}
 
 # What's your iMessage/iCloud/Apple ID? Note the format
+# This must be the same as what's listed under Accounts
 property myIMsgService : "E:myIMessage@me.com"
 
 # Remember the iMessage that just came in
@@ -23,8 +24,11 @@ property recvText : ""
 property recvBuddy : ""
 
 # Account to use for forwarding
+# (This is the "friendly" name in the Accounts list)
 property fwdService : "Fowarding Chat Acct"
+
 # The buddy to receive the forwarded message - presumably your primary chat acct
+# To send to an SMS, enter as format "+15555551212"
 property fwdServiceBuddy : "myPrimary@gmail.com"
 
 # What ultimately gets forwarded
@@ -39,7 +43,7 @@ using terms from application "Messages"
 		set recvBuddy to name of theBuddy as text
 		
 		# fwd
-		if recvText ­ "" then
+		if recvText â‰  "" then
 			try
 				if recvService = myIMsgService then # incoming iMessage
 					# recvBuddyId is ABCDEFGH-IJKL-MNOP-QRST-UVWXYZABCDEF:+17894560123
@@ -73,6 +77,59 @@ using terms from application "Messages"
 		# make messages happy
 		return true
 	end message received
+	
+	# The following are unused but need to be defined to avoid an error
+	# I don't fully understand why, but all the Apple examples in Mavericks
+	# have this now as well.
+	
+	on message sent theMessage for theChat
+		
+	end message sent
+	
+	on active chat message received
+		
+	end active chat message received
+	
+	on chat room message received theMessage from theBuddy for theChat
+		
+	end chat room message received
+	
+	on addressed chat room message received theMessage from theBuddy for theChat
+		
+	end addressed chat room message received
+	
+	on addressed message received theMessage from theBuddy for theChat
+		
+	end addressed message received
+	
+	on av chat started
+		
+	end av chat started
+	
+	on av chat ended
+		
+	end av chat ended
+	
+	on login finished for theService
+		
+	end login finished
+	
+	on logout finished for theService
+		
+	end logout finished
+	
+	on buddy became available theBuddy
+		
+	end buddy became available
+	
+	on buddy became unavailable theBuddy
+		
+	end buddy became unavailable
+	
+	on completed file transfer
+		
+	end completed file transfer
+		
 end using terms from
 
 # Nothing you put here will get executed - only what's inside the event handler block runs
