@@ -5,6 +5,7 @@
 # References
 # https://discussions.apple.com/thread/5214769?start=0&tstart=0
 # https://46b.it/2012/hacking-with-imessage
+# http://stackoverflow.com/questions/34170906/error-in-applescript-for-imessage-can-t-get-service-of-text-chat-id - Forum on bug in El Capitan. Currently at same conclusion.
 
 # You can enumerate all your chat accounts on Messages like this:
 (*
@@ -36,37 +37,51 @@ property fwdMsg : ""
 
 # Event handler
 using terms from application "Messages"
+	#Handler for parsing string. termRequested is which parsed word is requested from the string (e.g. first, second, third...etc.)
+	on parse(delimiter, stringToParse, termRequested)
+		set oldDelims to AppleScript's text item delimiters
+		set AppleScript's text item delimiters to {delimiter}
+		set stringToReturn to text item termRequested of stringToParse
+		set AppleScript's text item delimiters to oldDelims
+		
+		return stringToReturn
+	end parse
+	
 	on message received theText from theBuddy for theChat
 		# get what we need
-		set recvService to name of service of theChat
+		# Apparent bug in OSX El Capitan where service properties for theChat are not present -> theBuddy is used instead
+		set recvService to name of service of theBuddy # theBuddy used instead of theChat
 		set recvText to theText
 		set recvBuddy to name of theBuddy as text
 		
 		# fwd
-		if recvText ≠ "" then
+		if recvText /= "" then
 			try
 				if recvService = myIMsgService then # incoming iMessage
 					# recvBuddyId is ABCDEFGH-IJKL-MNOP-QRST-UVWXYZABCDEF:+17894560123
 					set recvBuddyId to id of theBuddy as text
-					set oldDelims to AppleScript's text item delimiters
-					set AppleScript's text item delimiters to {":"}
-					set recvBuddyId to text item 2 of recvBuddyId
-					set AppleScript's text item delimiters to oldDelims
+					set recvBuddyId to my parse(":", recvBuddyId, 2)
 					# now recvBuddyId is +17894560123
 					
+					# e.g. SMS looks like "[John Doe] [example@gmail.com] [MessageText]"
 					set fwdMsg to "[" & recvBuddy & "] [" & recvBuddyId & "] [" & recvText & "]"
 					set sendServiceName to name of 1st service whose name = fwdService
 					set myid to get id of service sendServiceName
 					set sendBuddy to buddy fwdServiceBuddy of service id myid
 					send fwdMsg to sendBuddy
 				else if recvService = fwdService then # outgoing iMessage
+					# send iMessage using user's primary iMessage account.
 					set sendServiceName to name of 1st service whose name = myIMsgService
 					set myid to get id of service sendServiceName
-					set tokens to words of recvText
-					set targetBuddy to get item 1 of tokens
+					
+					# Message looks like "[emailToSendTo@example.com] MessageText"
+					# Chop off first [ and then retrieve email address to send to
+					set targetBuddy to text 2 thru (length of recvText) of recvText
+					set targetBuddy to my parse("]", targetBuddy, 1)
+					
 					set sendBuddy to buddy targetBuddy of service id myid
 					# chop out targetBuddy from recvText
-					set fwdMsg to text (2 + (length of targetBuddy)) thru (length of recvText) of recvText
+					set fwdMsg to text (3 + (length of targetBuddy)) thru (length of recvText) of recvText
 					send fwdMsg to sendBuddy
 				end if
 			on error err
@@ -129,7 +144,7 @@ using terms from application "Messages"
 	on completed file transfer
 		
 	end completed file transfer
-		
+	
 end using terms from
 
 # Nothing you put here will get executed - only what's inside the event handler block runs
