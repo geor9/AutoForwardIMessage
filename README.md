@@ -14,9 +14,9 @@ Note
 ====
 - Supports two-way iMessage forwarding, tested on OS X 10.11.
 - Only works if Messages app is both (1) running and (2) out of focus.
- - This script relies on "Message Received" event to fire. It seems that this event may not fire (and hence forwarding won't work) if:
-  - (1) Messages app currently has focus, and 
-  - (2) you receive messages on currently active chat.
+  - This script relies on "Message Received" event to fire. It seems that this event may not fire (and hence forwarding won't work) if:
+    - (1) Messages app currently has focus, and 
+    - (2) you receive messages on currently active chat.
  - Perhaps the fix is to listen for "Message Received in Active Chat" event too?
 - Only supports one-to-one text iMessages. Group messsages, pictures, movies don't work.
  - Active discussion on iMessage attachments at https://discussions.apple.com/thread/5214769
